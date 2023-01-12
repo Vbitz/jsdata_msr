@@ -1,0 +1,30 @@
+{
+  "name": "jsdatamsr",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "engines": {
+    "node": ">10"
+  },
+  "scripts": {
+    "start": "npm run compile && node build/src",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "gts lint",
+    "clean": "gts clean",
+    "compile": "tsc",
+    "fix": "gts fix",
+    "prepare": "npm run compile",
+    "pretest": "npm run compile",
+    "posttest": "npm run lint"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^14.11.2",
+    "gts": "^3.1.0"
+  },
+  "dependencies": {
+    "typescript": "^4.9.4"
+  }
+}

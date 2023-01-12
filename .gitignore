@@ -1,4 +1,8 @@
 env/
 store/
+!store/output/*.csv
 
 output.csv
+
+node_modules/
+build/
