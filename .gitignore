@@ -1,6 +1,7 @@
 env/
-store/
-!store/output/*.csv
+
+store/*
+!store/output
 
 output.csv
 
