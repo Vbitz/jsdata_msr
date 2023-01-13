@@ -137,6 +137,8 @@ type CommitData struct {
 }
 
 type FeatureFlags struct {
+	TotalTypeScriptFiles int
+
 	SatisfiesExpression                bool
 	AccessorKeyword                    bool
 	ExtendsConstraintOnInfer           bool
@@ -157,6 +159,8 @@ func (f FeatureFlags) Merge(other *FeatureFlags) FeatureFlags {
 		return f
 	}
 	return FeatureFlags{
+		TotalTypeScriptFiles: f.TotalTypeScriptFiles + other.TotalTypeScriptFiles,
+
 		SatisfiesExpression:                f.SatisfiesExpression || other.SatisfiesExpression,
 		AccessorKeyword:                    f.AccessorKeyword || other.AccessorKeyword,
 		ExtendsConstraintOnInfer:           f.ExtendsConstraintOnInfer || other.ExtendsConstraintOnInfer,
@@ -184,6 +188,7 @@ func get(m map[string]bool, name string) bool {
 
 func GetFlagsFromResponse(resp tsbridge.Response) *FeatureFlags {
 	return &FeatureFlags{
+		TotalTypeScriptFiles:               1,
 		SatisfiesExpression:                get(resp.Features, "SatisfiesExpression"),
 		AccessorKeyword:                    get(resp.Features, "AccessorKeyword"),
 		ExtendsConstraintOnInfer:           get(resp.Features, "ExtendsConstraintOnInfer"),
@@ -523,6 +528,7 @@ func main() {
 					commit.PackageVersion,
 					commit.TypeScriptVersion,
 					fmt.Sprintf("%d", commit.Date),
+					fmt.Sprintf("%d", commit.Flags.TotalTypeScriptFiles),
 					str(commit.Flags.AccessorKeyword),
 					str(commit.Flags.SatisfiesExpression),
 					str(commit.Flags.ExtendsConstraintOnInfer),

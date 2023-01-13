@@ -14,7 +14,7 @@ import (
 
 var (
 	input  = flag.String("input", "repos.njson", "The input list of repos.")
-	limit  = flag.Int("limit", 100, "The number of repos to extract.")
+	limit  = flag.Int("limit", 500, "The number of repos to extract.")
 	output = flag.String("output", "repos.clean.njson", "The cleaned list of repos to output.")
 )
 
