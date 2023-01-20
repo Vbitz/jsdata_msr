@@ -9,7 +9,7 @@ import (
 	"os"
 	"sort"
 
-	"eait.uq.edu.au/jscarsbrook/jsdata/v2/pkg/common"
+	"example.com/jsdata/v3/pkg/common"
 )
 
 var (

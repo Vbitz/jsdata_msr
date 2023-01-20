@@ -18,8 +18,8 @@ import (
 	"sync/atomic"
 	"time"
 
-	"eait.uq.edu.au/jscarsbrook/jsdata/v2/pkg/common"
-	"eait.uq.edu.au/jscarsbrook/jsdata/v2/pkg/tsbridge"
+	"example.com/jsdata/v3/pkg/common"
+	"example.com/jsdata/v3/pkg/tsbridge"
 
 	"github.com/go-git/go-billy/v5/osfs"
 	"github.com/go-git/go-git/v5"

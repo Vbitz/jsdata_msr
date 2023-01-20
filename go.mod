@@ -1,4 +1,4 @@
-module eait.uq.edu.au/jscarsbrook/jsdata/v2
+module example.com/jsdata/v3
 
 go 1.18
 

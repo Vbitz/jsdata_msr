@@ -5,7 +5,7 @@ import (
 	"log"
 	"os"
 
-	"eait.uq.edu.au/jscarsbrook/jsdata/v2/pkg/tsbridge"
+	"example.com/jsdata/v3/pkg/tsbridge"
 )
 
 var (

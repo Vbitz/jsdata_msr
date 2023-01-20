@@ -25,6 +25,17 @@ VERSION_RELEASE_DATES = {
     "4.0": datetime.datetime(2020, 8, 20),
 }
 
+VERSION_FEATURES = {
+    "typescript_4.9": "4.9",
+    "typescript_4.7": "4.7",
+    "typescript_4.5": "4.5",
+    "typescript_4.4": "4.4",
+    "typescript_4.3": "4.3",
+    "typescript_4.2": "4.2",
+    "typescript_4.1": "4.1",
+    "typescript_4.0": "4.0"
+}
+
 FEATURE_RELEASE_DATES = {
     "satisfies_expression": VERSION_RELEASE_DATES["4.9"],
     "accessor_keyword": VERSION_RELEASE_DATES["4.9"],
@@ -117,7 +128,11 @@ def get_day_delta(a: datetime.datetime, b: datetime.datetime):
     return (a - b).days
 
 
-def compute_deltas(flags: dict[str, bool], commit_time: datetime.datetime) -> dict[str, int | None]:
+def version_greater(a: str, b: str) -> bool:
+    return a.startswith(b)
+
+
+def compute_deltas(flags: dict[str, bool], typescript_version: str, commit_time: datetime.datetime) -> dict[str, int | None]:
     ret = {}
 
     for k, v in flags.items():
@@ -128,6 +143,14 @@ def compute_deltas(flags: dict[str, bool], commit_time: datetime.datetime) -> di
         else:
             pass
             # ret[k] = None
+
+    if typescript_version != None:
+        for k, v in VERSION_FEATURES.items():
+            release_date = VERSION_RELEASE_DATES[v]
+
+            if version_greater(typescript_version, v):
+                delta_days = get_day_delta(commit_time, release_date)
+                ret[k] = delta_days
 
     return ret
 
@@ -153,7 +176,8 @@ def main(args):
         for row in rows:
             row_flags = row.get_flags()
 
-            flag_delta = compute_deltas(row_flags, row.commit_time)
+            flag_delta = compute_deltas(
+                row_flags, row.ts_version, row.commit_time)
 
             if row.id not in repo_feature_introduction:
                 repo_feature_introduction[row.id] = {}
@@ -204,6 +228,14 @@ def main(args):
         "remapped_name_in_mapped_type": {},
         "named_tuple_member": {},
         "short_circuit_assignment": {},
+        "typescript_4.9": {},
+        "typescript_4.7": {},
+        "typescript_4.5": {},
+        "typescript_4.4": {},
+        "typescript_4.3": {},
+        "typescript_4.2": {},
+        "typescript_4.1": {},
+        "typescript_4.0": {},
     }
 
     for milestone in range(-50, 800, 10):
